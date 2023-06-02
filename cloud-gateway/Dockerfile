@@ -1,4 +1,4 @@
 FROM openjdk:11
 EXPOSE 2020
-ADD target/payment-service.jar cloud-gateway.jar 
+ADD target/cloud-gateway.jar cloud-gateway.jar 
 ENTRYPOINT [ "java","-jar","/cloud-gateway.jar" ]
