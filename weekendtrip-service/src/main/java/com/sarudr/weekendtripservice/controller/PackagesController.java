@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sarudr.weekendtripservice.dto.PackagePojo;
 import com.sarudr.weekendtripservice.model.Package;
 import com.sarudr.weekendtripservice.service.PackagesService;
 
@@ -35,19 +34,18 @@ public class PackagesController {
 
 	@ResponseBody
 	@PostMapping(value = "/savepackage", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PackagePojo> savePackage(@RequestBody PackagePojo pack) {
+	public ResponseEntity<Package> savePackage(@RequestBody Package pack) {
 		return ResponseEntity.ok(packagesService.savePackage(pack));
 	}
 
 	@PutMapping(value = "/updatepackage/{packid}")
-	public PackagePojo updatepackage(@PathVariable(value = "packid") long id, @RequestBody PackagePojo pack) {
+	public Package updatepackage(@PathVariable(value = "packid") long id, @RequestBody Package pack) {
 		return packagesService.updatepack(id, pack);
 	}
 
 	@ResponseBody
 	@PostMapping(value = "/savepackagebycityid/{cityid}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PackagePojo> savePackage(@PathVariable(value = "cityid") long cityId,
-			@RequestBody PackagePojo pack) {
+	public ResponseEntity<Package> savePackage(@PathVariable(value = "cityid") long cityId, @RequestBody Package pack) {
 		return ResponseEntity.ok(packagesService.savepackageById(cityId, pack));
 	}
 

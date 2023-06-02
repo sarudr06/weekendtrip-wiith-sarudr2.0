@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.sarudr.weekendtripservice.controller.PackagesController;
-import com.sarudr.weekendtripservice.dto.PackagePojo;
 import com.sarudr.weekendtripservice.model.Package;
 import com.sarudr.weekendtripservice.service.PackagesService;
 
@@ -38,12 +37,12 @@ class PackageControllerTest {
 
 	@Test
 	void testSavePackage() {
-		PackagePojo packagePojo = new PackagePojo();
-		PackagePojo savePack = new PackagePojo();
+		Package packagePojo = new Package();
+		Package savePack = new Package();
 
 		when(packagesService.savePackage(savePack)).thenReturn(savePack);
 
-		ResponseEntity<PackagePojo> entity = controller.savePackage(savePack);
+		ResponseEntity<Package> entity = controller.savePackage(savePack);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		assertEquals(savePack, entity.getBody());
 
@@ -70,12 +69,12 @@ class PackageControllerTest {
 
 	@Test
 	void testUpdatePack() {
-		PackagePojo packagePojo = new PackagePojo();
-		PackagePojo updatePack = new PackagePojo();
+		Package packagePojo = new Package();
+		Package updatePack = new Package();
 
 		when(packagesService.updatepack(1, packagePojo)).thenReturn(updatePack);
 
-		PackagePojo result = controller.updatepackage(1, updatePack);
+		Package result = controller.updatepackage(1, updatePack);
 
 		assertEquals(updatePack, result);
 

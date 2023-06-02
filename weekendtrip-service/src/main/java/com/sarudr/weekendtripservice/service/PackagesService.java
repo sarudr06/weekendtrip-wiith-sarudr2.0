@@ -3,20 +3,19 @@ package com.sarudr.weekendtripservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.sarudr.weekendtripservice.dto.PackagePojo;
 import com.sarudr.weekendtripservice.model.Package;
 
 public interface PackagesService {
 
-	PackagePojo savePackage(PackagePojo pack);
+	Package savePackage(Package pack);
 
 	List<Package> getPack();
 
 	Package getPackById(long packId);
 
-	PackagePojo updatepack(long packId, PackagePojo pack);
+	Package updatepack(long packId, Package pack);
 
-	PackagePojo savepackageById(long cityId, PackagePojo pack);
+	Package savepackageById(long cityId, Package pack);
 
 	String changeStatus(long packId);
 

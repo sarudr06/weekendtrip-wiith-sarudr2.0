@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sarudr.weekendtripservice.dto.PlacePojo;
 import com.sarudr.weekendtripservice.model.Place;
 import com.sarudr.weekendtripservice.service.PlacesService;
 
@@ -35,8 +34,8 @@ public class PlacesController {
 
 	@ResponseBody
 	@PostMapping(value = "/savePlace", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PlacePojo> savePlace(@RequestBody PlacePojo placePojo) {
-		return ResponseEntity.ok(service.savePlace(placePojo));
+	public ResponseEntity<Place> savePlace(@RequestBody Place place) {
+		return ResponseEntity.ok(service.savePlace(place));
 	}
 
 	@DeleteMapping(value = "/changeStatusOfPlace/{placeId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,16 +45,15 @@ public class PlacesController {
 	}
 
 	@PutMapping(value = "/updatePlaceByPlaceId/{placeId}")
-	public PlacePojo updatePlaceByPlaceId(@PathVariable(value = "placeId") long placeId,
-			@RequestBody PlacePojo placePojo) {
-		return service.updatePlace(placeId, placePojo);
+	public Place updatePlaceByPlaceId(@PathVariable(value = "placeId") long placeId, @RequestBody Place place) {
+		return service.updatePlace(placeId, place);
 	}
 
 	@ResponseBody
 	@PostMapping(value = "/saveplacebypackid/{packId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<PlacePojo> savePlaceByPackId(@PathVariable(value = "packId") long packId,
-			@RequestBody PlacePojo placePojo) {
-		return ResponseEntity.ok(service.saveplaceById(packId, placePojo));
+	public ResponseEntity<Place> savePlaceByPackId(@PathVariable(value = "packId") long packId,
+			@RequestBody Place place) {
+		return ResponseEntity.ok(service.saveplaceById(packId, place));
 	}
 
 }

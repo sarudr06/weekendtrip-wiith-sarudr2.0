@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.feuji.weekendtripssecurity.authentication.ResetPassword;
 import com.feuji.weekendtripssecurity.user.User;
-import com.feuji.weekendtripssecurity.user.UserConverter;
-import com.feuji.weekendtripssecurity.user.UserDto;
 import com.feuji.weekendtripssecurity.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -24,18 +22,15 @@ public class UserServiceImplementation implements UserService {
 	@Autowired
 	UserRepository repository;
 
-	@Autowired
-	UserConverter converter;
 	private final PasswordEncoder passwordEncoder;
 
 	String users = "user";
 	String admin = "admin";
 
 	@Override
-	public UserDto saveUser(UserDto userDto) {
-		User user = converter.convertDtoToEntity(userDto);
-//		repository.save(user);
-		return converter.convertEntityToDto(repository.save(user));
+	public User saveUser(User user) {
+
+		return repository.save(user);
 	}
 
 	@Override
@@ -49,11 +44,9 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	@Override
-	public UserDto updateUser(Integer id, UserDto userDto) {
-		User user = converter.convertDtoToEntity(userDto);
+	public User updateUser(Integer id, User user) {
 		user.setId(id);
-//		repository.save(user);
-		return converter.convertEntityToDto(repository.save(user));
+		return repository.save(user);
 	}
 
 	@Override
@@ -68,7 +61,6 @@ public class UserServiceImplementation implements UserService {
 				user.setRole(users);
 			}
 
-//			repository.save(user);
 			return Optional.of(repository.save(user));
 		}
 

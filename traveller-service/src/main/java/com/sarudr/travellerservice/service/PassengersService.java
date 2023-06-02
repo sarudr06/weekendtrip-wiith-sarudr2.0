@@ -6,7 +6,7 @@ import com.sarudr.travellerservice.model.Passenger;
 
 public interface PassengersService {
 
-	Passenger savePassengers(Passenger passsengerDto);
+	Passenger savePassengers(Passenger passsenger);
 
 	List<Passenger> getPassengers();
 

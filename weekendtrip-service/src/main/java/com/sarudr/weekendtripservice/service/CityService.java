@@ -2,7 +2,6 @@ package com.sarudr.weekendtripservice.service;
 
 import java.util.List;
 
-import com.sarudr.weekendtripservice.dto.CityPojo;
 import com.sarudr.weekendtripservice.model.City;
 
 public interface CityService {
@@ -11,9 +10,9 @@ public interface CityService {
 
 	String changeStatus(long cityId);
 
-	CityPojo saveCity(CityPojo citypojo);
+	City saveCity(City city);
 
-	CityPojo updateCity(long cityId, CityPojo cityPojo);
+	City updateCity(long cityId, City city);
 
 	List<City> getAllCities();
 }

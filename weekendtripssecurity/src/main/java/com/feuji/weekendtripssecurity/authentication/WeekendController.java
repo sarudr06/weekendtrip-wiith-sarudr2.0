@@ -22,7 +22,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.feuji.weekendtripssecurity.service.UserService;
 import com.feuji.weekendtripssecurity.user.User;
-import com.feuji.weekendtripssecurity.user.UserDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,8 +45,8 @@ public class WeekendController {
 	}
 
 	@PutMapping(value = "/updateuser/{userId}")
-	public UserDto updateUser(@PathVariable(value = "userId") Integer userId, @RequestBody UserDto userDto) {
-		return service.updateUser(userId, userDto);
+	public User updateUser(@PathVariable(value = "userId") Integer userId, @RequestBody User user) {
+		return service.updateUser(userId, user);
 	}
 
 	@PostMapping(value = "/changepassword")
@@ -73,7 +72,7 @@ public class WeekendController {
 	@DeleteMapping("/changestatusofcity/{cityId}")
 	public ResponseEntity<String> changeStatusOfCity(@PathVariable(value = "cityId") Long cityId) {
 
-		String url = "http://localhost:8082/tour/weekendtrip/city/changestatusofcity/" + cityId;
+		String url = "http://localhost:9101/weekendtrip/city/changestatusofcity/" + cityId;
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -91,43 +90,43 @@ public class WeekendController {
 	}
 
 	// pdf generation for user
-	@GetMapping("/pdf/user/{travellerId}")
-	public ResponseEntity<String> generatePdfForUser(@PathVariable(value = "travellerId") long travellerId) {
-
-		String url = "http://localhost:8082/tour/weekendtrip/traveller/pdf/user/" + travellerId;
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-
-		HttpEntity<String> entity = new HttpEntity<>(url);
-
-		ResponseEntity<String> resttemplate = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-
-		if (resttemplate.getStatusCode().is2xxSuccessful()) {
-			return ResponseEntity.ok().body(resttemplate.getBody());
-		} else {
-			throw new ArithmeticException();
-		}
-	}
-
-	// payment amount sent
-	@GetMapping("/payment/{amount}/{id}")
-	public ResponseEntity<String> paymentStatus(@PathVariable int amount, @PathVariable int id) {
-
-		String url = "http://localhost:8082/tour/weekendtrip/traveller/payment/" + amount + "/" + id;
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-
-		HttpEntity<String> entity = new HttpEntity<>(url);
-
-		ResponseEntity<String> resttemplate = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-
-		if (resttemplate.getStatusCode().is2xxSuccessful()) {
-			return ResponseEntity.ok().body(resttemplate.getBody());
-		} else {
-			throw new ArithmeticException();
-		}
-	}
-
+//	@GetMapping("/pdf/user/{travellerId}")
+//	public ResponseEntity<String> generatePdfForUser(@PathVariable(value = "travellerId") long travellerId) {
+//
+//		String url = "http://localhost:8082/tour/weekendtrip/traveller/pdf/user/" + travellerId;
+//
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//		HttpEntity<String> entity = new HttpEntity<>(url);
+//
+//		ResponseEntity<String> resttemplate = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+//
+//		if (resttemplate.getStatusCode().is2xxSuccessful()) {
+//			return ResponseEntity.ok().body(resttemplate.getBody());
+//		} else {
+//			throw new ArithmeticException();
+//		}
+//	}
+//
+//	// payment amount sent
+//	@GetMapping("/payment/{amount}/{id}")
+//	public ResponseEntity<String> paymentStatus(@PathVariable int amount, @PathVariable int id) {
+//
+//		String url = "http://localhost:8082/tour/weekendtrip/traveller/payment/" + amount + "/" + id;
+//
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//		HttpEntity<String> entity = new HttpEntity<>(url);
+//
+//		ResponseEntity<String> resttemplate = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+//
+//		if (resttemplate.getStatusCode().is2xxSuccessful()) {
+//			return ResponseEntity.ok().body(resttemplate.getBody());
+//		} else {
+//			throw new ArithmeticException();
+//		}
+//	}
+//
 }

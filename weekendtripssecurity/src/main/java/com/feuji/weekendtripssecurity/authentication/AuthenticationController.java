@@ -19,12 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.feuji.weekendtripssecurity.service.UserService;
 import com.feuji.weekendtripssecurity.user.User;
-import com.feuji.weekendtripssecurity.user.UserDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@CrossOrigin(origins = "**",allowedHeaders = "**")
+@CrossOrigin(origins = "**", allowedHeaders = "**")
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -58,8 +57,8 @@ public class AuthenticationController {
 	}
 
 	@PutMapping(value = "/updateuser/{userId}")
-	public UserDto updateUser(@PathVariable(value = "userId") Integer userId, @RequestBody UserDto userDto) {
-		return userService.updateUser(userId, userDto);
+	public User updateUser(@PathVariable(value = "userId") Integer userId, @RequestBody User user) {
+		return userService.updateUser(userId, user);
 	}
 
 	@PostMapping(value = "/changepassword")
@@ -75,7 +74,8 @@ public class AuthenticationController {
 	}
 
 	@DeleteMapping(value = "/changestatusofuserbyEmail/{useremail}")
-	public ResponseEntity<Optional<User>> changeStatusOfUserByEmail(@PathVariable(value = "useremail") String useremail) {
+	public ResponseEntity<Optional<User>> changeStatusOfUserByEmail(
+			@PathVariable(value = "useremail") String useremail) {
 		return ResponseEntity.ok(userService.changeStatusByEmail(useremail));
 	}
 

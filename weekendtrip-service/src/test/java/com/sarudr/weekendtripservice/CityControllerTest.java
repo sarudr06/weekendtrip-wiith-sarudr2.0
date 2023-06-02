@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.sarudr.weekendtripservice.controller.CityController;
-import com.sarudr.weekendtripservice.dto.CityPojo;
 import com.sarudr.weekendtripservice.model.City;
 import com.sarudr.weekendtripservice.service.CityService;
 
@@ -39,13 +38,13 @@ class CityControllerTest {
 
 	@Test
 	void testSaveCity() {
-		CityPojo cityPojo = new CityPojo();
+		City cityPojo = new City();
 
-		CityPojo savedCity = new CityPojo();
+		City savedCity = new City();
 
 		when(cityService.saveCity(cityPojo)).thenReturn(savedCity);
 
-		ResponseEntity<CityPojo> response = cityController.saveCity(cityPojo);
+		ResponseEntity<City> response = cityController.saveCity(cityPojo);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(savedCity, response.getBody());
@@ -73,13 +72,13 @@ class CityControllerTest {
 	@Test
 	void testUpdateCity() {
 
-		CityPojo cityPojo = new CityPojo();
+		City cityPojo = new City();
 
-		CityPojo updatedCity = new CityPojo();
+		City updatedCity = new City();
 
 		when(cityService.updateCity(1, cityPojo)).thenReturn(updatedCity);
 
-		CityPojo result = cityController.updatecity(1, updatedCity);
+		City result = cityController.updatecity(1, updatedCity);
 
 		assertEquals(updatedCity, result);
 
@@ -88,7 +87,7 @@ class CityControllerTest {
 	}
 
 	@Test
-	 void changeStatusOfCity() {
+	void changeStatusOfCity() {
 
 		String val = null;
 

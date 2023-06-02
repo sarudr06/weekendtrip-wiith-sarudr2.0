@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.feuji.paymentservice.dto.PaymentDto;
+import com.feuji.paymentservice.model.Payment;
 import com.feuji.paymentservice.service.PaymentService;
 
-@CrossOrigin(origins = "**",allowedHeaders = "**")
+@CrossOrigin(origins = "**", allowedHeaders = "**")
 
 @RestController
 @RequestMapping("/weekend")
@@ -20,8 +20,8 @@ public class PaymentController {
 	private PaymentService paymentService;
 
 	@PostMapping("/dopayment")
-	public PaymentDto doPayment(@RequestBody PaymentDto paymentDto) {
-		return paymentService.doPayment(paymentDto);
+	public Payment doPayment(@RequestBody Payment payment) {
+		return paymentService.doPayment(payment);
 	}
 
 }

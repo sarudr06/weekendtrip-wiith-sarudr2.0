@@ -1,11 +1,11 @@
 package com.feuji.paymentservice.service;
 
-import com.feuji.paymentservice.dto.PaymentDto;
+import com.feuji.paymentservice.model.Payment;
 
 public interface PaymentService {
 
 	public String paymentProcessing();
 
-	PaymentDto doPayment(PaymentDto paymentDto);
+	Payment doPayment(Payment payment);
 
 }

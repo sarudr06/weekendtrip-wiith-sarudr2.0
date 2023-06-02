@@ -6,8 +6,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.feuji.paymentservice.dto.PaymentConverter;
-import com.feuji.paymentservice.dto.PaymentDto;
 import com.feuji.paymentservice.model.Payment;
 import com.feuji.paymentservice.repository.PaymentRepository;
 import com.feuji.paymentservice.service.PaymentService;
@@ -19,20 +17,16 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private PaymentRepository paymentRepository;
 
-	@Autowired
-	PaymentConverter converter;
-
 	@Override
 	public String paymentProcessing() {
 		return random.nextBoolean() ? "success" : "failure"; // Reuse the random instance
 	}
 
 	@Override
-	public PaymentDto doPayment(PaymentDto paymentDto) {
-		Payment payment = converter.convertDtoToEntity(paymentDto);
+	public Payment doPayment(Payment payment) {
 		payment.setTransactionId(UUID.randomUUID().toString());
-		payment.setPaymentStatus(paymentProcessing()); 
+		payment.setPaymentStatus(paymentProcessing());
 		paymentRepository.save(payment);
-		return converter.convertEntityToDto(payment);
+		return paymentRepository.save(payment);
 	}
 }

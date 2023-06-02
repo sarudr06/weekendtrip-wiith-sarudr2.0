@@ -32,8 +32,7 @@ public class ReportController {
 
 	@Autowired
 	private EmailSenderService senderService;
-//	@Autowired
-//	private PdfGeneratorForUser service;
+
 
 	@Autowired
 	private HttpServletResponse response;

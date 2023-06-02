@@ -40,23 +40,7 @@ public class PdfGeneratorForUser {
 	@Autowired
 	private RestTemplate restTemplate;
 
-////	public void generate(HttpServletResponse response, long travellerId, double amount)
-////			throws DocumentException, IOException {
-////		response.setContentType("application/pdf");
-////		response.setHeader("Content-Disposition", "inline; filename=Mypdf.pdf");
-////		Document document = new Document(PageSize.A4);
-////
-////		document.open();
-//
-////		addRectangleBorder(document);
-//		addTitle(document);
-//		addLogo(document);
-//		addBookingDetails(document, travellerId);
-//		addConfirmationMessage(document, travellerId);
-//		addPassengerList(document, travellerId, amount);
-//
-//		document.close();
-////	}
+
 	
 	public void generate(HttpServletResponse response, long travellerId,double amount) throws DocumentException, IOException {
 
@@ -188,126 +172,6 @@ public class PdfGeneratorForUser {
 
 		document.close();
 	}
-//
-//	private void addRectangleBorder(Document document) throws DocumentException {
-//		Rectangle rect = new Rectangle(577, 825, 18, 15);
-//		rect.enableBorderSide(Rectangle.BOX);
-//		rect.setBorderColor(BaseColor.BLACK);
-//		rect.setBorderWidth(1);
-//		document.add(rect);
-//		document.add(Chunk.NEWLINE);
-//		document.add(Chunk.NEWLINE);
-//	}
-//
-//	private void addTitle(Document document) throws DocumentException {
-//		Font fontTitle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
-//		fontTitle.setSize(20);
-//		Paragraph title = new Paragraph("Trip Confirmation Voucher", fontTitle);
-//		title.setAlignment(Paragraph.ALIGN_LEFT);
-//		document.add(title);
-//	}
-
-//	private void addLogo(Document document) throws IOException, DocumentException {
-//		Image img = Image.getInstance(
-//				ClassLoader.getSystemResource("weekendtrips-low-resolution-logo-color-on-transparent-background.png"));
-//		img.scaleAbsolute(146, 70);
-//		Phrase phrase = new Phrase();
-//		phrase.add(new Chunk(img, 390, -30));
-//		document.add(new Paragraph(phrase));
-//	}
-//
-//	private void addBookingDetails(Document document, long travellerId) throws DocumentException {
-//		Font data = FontFactory.getFont(FontFactory.TIMES_ROMAN);
-//		data.setSize(10);
-//
-//		document.add(new Paragraph("WeekendTrip Booking ID - 978676" + travellerId, data));
-//		Traveller traveller = getTravellerById(travellerId);
-//		document.add(new Paragraph("Booking Date - " + traveller.getPurchaseDate(), data));
-//
-//		document.add(new Paragraph(
-//				".............................................................................................................................."));
-//	}
-//
-//	private void addConfirmationMessage(Document document, long travellerId) throws DocumentException {
-//		Font description = FontFactory.getFont(FontFactory.TIMES_ROMAN);
-//		description.setSize(10);
-//
-//		document.add(new Paragraph("Dear Traveller"));
-//		document.add(Chunk.NEWLINE);
-//		document.add(new Paragraph("Your Booking is confirmed."));
-//		document.add(new Paragraph("Thank you for using WeekendTrip.com for booking your trip."));
-//		document.add(new Paragraph("For your reference, your WeekendTrip Booking ID is - 978676" + travellerId));
-//		document.add(new Paragraph("The voucher number is -"));
-//		document.add(new Paragraph(
-//				"Kindly note, your booking is confirmed, and you are not required to contact the hotel or WeekendTrip.com to reconfirm the same."));
-//		document.add(Chunk.NEWLINE);
-//		document.add(new Paragraph(
-//				"If your hotel booking includes a complimentary car transfer, you will need to call the hotel directly to let them know your travel details."));
-//		document.add(new Paragraph(
-//				"You will need to carry a printout of this e-mail and present it at the hotel at the time of check-in."));
-//		document.add(Chunk.NEWLINE);
-//		document.add(new Paragraph(
-//				"Please note that you will receive the WeekendTrip Service fee invoice for your booking on the day of checkout on the email ID using which the booking will be made."));
-//		document.add(Chunk.NEWLINE);
-//		document.add(new Paragraph("We hope you have a pleasant stay and look forward to assisting you again!"));
-//		document.add(Chunk.NEWLINE);
-//		document.add(new Paragraph("Team WeekendTrip.com"));
-//		document.add(Chunk.NEWLINE);
-//
-//		Paragraph paragraph1 = new Paragraph(
-//				"THIS IS YOUR HOTEL CONFIRMATION VOUCHER. A PRINTED COPY OF THIS MUST BE PRESENTED AT THE HOTEL AT THE TIME OF CHECK-IN.",
-//				description);
-//		paragraph1.setAlignment(Paragraph.ALIGN_CENTER);
-//		document.add(paragraph1);
-//		document.add(Chunk.NEWLINE);
-//	}
-//
-//	private void addPassengerList(Document document, long travellerId, double amount) throws DocumentException {
-//		Traveller traveller = getTravellerById(travellerId);
-//		List<Passenger> passengersList = traveller.getPassenger();
-//		int count = passengersList.size();
-//
-//		long menCount = passengersList.stream().filter(e -> e.getPassengerGender().equalsIgnoreCase("male")).count();
-//		long womenCount = passengersList.stream().filter(e -> e.getPassengerGender().equalsIgnoreCase("female"))
-//				.count();
-//		long childCount = passengersList.stream().filter(e -> e.getPassengerAge() < 5).count();
-//
-//		document.add(new Paragraph("City: " + traveller.getCityName()));
-//		document.add(new Paragraph("Package Name: " + traveller.getPackageName()));
-//		document.add(new Paragraph("Package Price: " + amount));
-//		document.add(new Paragraph(
-//				".............................................................................................................................."));
-//		document.add(new Paragraph("User Email: " + traveller.getTravellerEmail()));
-//		document.add(new Paragraph(
-//				".............................................................................................................................."));
-//		document.add(new Paragraph("List of Passengers - " + count + "     Male - " + menCount + "   Female - "
-//				+ womenCount + "   Child - " + childCount));
-//
-//		PdfPTable table = new PdfPTable(3);
-//		table.setWidthPercentage(100f);
-//		table.setWidths(new int[] { 3, 3, 3 });
-//		table.setSpacingBefore(3);
-//
-//		PdfPCell cell = new PdfPCell();
-//		cell.setBackgroundColor(CMYKColor.WHITE);
-//		cell.setPadding(4);
-//		cell.setPhrase(new Phrase("Name"));
-//		table.addCell(cell);
-//		cell.setPhrase(new Phrase("Age"));
-//		table.addCell(cell);
-//		cell.setPhrase(new Phrase("Gender"));
-//		table.addCell(cell);
-//
-//		for (Passenger passenger : passengersList) {
-//			table.addCell(passenger.getPassengerName());
-//			table.addCell(String.valueOf(passenger.getPassengerAge()));
-//			table.addCell(passenger.getPassengerGender());
-//		}
-//
-//		document.add(table);
-//		document.add(new Paragraph(
-//				".............................................................................................................................."));
-//	}
 
 	public Traveller getTravellerById(long travellerId) {
 		log.info("{}" + travellerId);
@@ -331,15 +195,7 @@ public class PdfGeneratorForUser {
 
 	}
 
-//	public List<Traveller> getAllTraveller() {
-//		log.info("getting all travellers {}" );
-//		List<Traveller> travellers = restTemplate
-//				.getForObject("http://traveller-service/traveller/weekend/getalltravellers", List.class);
-//		log.info("{}" + travellers);
-//		 ObjectMapper objectMapper = new ObjectMapper();
-//		 objectMapper.readValue(travellers, List.class);
-//		travellers.stream().forEach(System.out::println);
-//		return travellers;
+
 	public Traveller getPassengerById(long travellerId) {
 		log.info("{}" + travellerId);
 		return getAllTraveller().stream().filter(e -> e.getTravellerId() == travellerId).collect(Collectors.toList())

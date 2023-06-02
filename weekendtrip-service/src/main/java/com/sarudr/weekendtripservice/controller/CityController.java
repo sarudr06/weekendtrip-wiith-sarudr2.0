@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sarudr.weekendtripservice.dto.CityPojo;
 import com.sarudr.weekendtripservice.model.City;
 import com.sarudr.weekendtripservice.service.CityService;
 
-@CrossOrigin(origins = "*",allowedHeaders = "**")
+@CrossOrigin(origins = "*", allowedHeaders = "**")
 @RestController
 @RequestMapping("/city")
 public class CityController {
@@ -35,12 +34,12 @@ public class CityController {
 
 	@ResponseBody
 	@PostMapping(value = "/savecity", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<CityPojo> saveCity(@RequestBody CityPojo city) {
+	public ResponseEntity<City> saveCity(@RequestBody City city) {
 		return ResponseEntity.ok(cityService.saveCity(city));
 	}
 
 	@PutMapping(value = "/updatecity/{cityId}")
-	public CityPojo updatecity(@PathVariable(value = "cityId") long cityId, @RequestBody CityPojo city) {
+	public City updatecity(@PathVariable(value = "cityId") long cityId, @RequestBody City city) {
 		return cityService.updateCity(cityId, city);
 	}
 

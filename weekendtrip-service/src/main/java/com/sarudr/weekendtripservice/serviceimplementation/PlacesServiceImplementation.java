@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sarudr.weekendtripservice.dto.PlaceConvertor;
-import com.sarudr.weekendtripservice.dto.PlacePojo;
 import com.sarudr.weekendtripservice.model.Package;
 import com.sarudr.weekendtripservice.model.Place;
 import com.sarudr.weekendtripservice.repository.PackageRepository;
@@ -22,20 +20,15 @@ public class PlacesServiceImplementation implements PlacesService {
 	@Autowired(required = true)
 	PlaceRepository placeRepository;
 
-	@Autowired
-	PlaceConvertor convertor;
-
 	@Override
-	public PlacePojo savePlace(PlacePojo placePojo) {
-		Place place = convertor.convertDtoToEntity(placePojo);
+	public Place savePlace(Place place) {
 		List<Package> packageList = packageRepository.findAll();
 		for (Package pack : packageList) {
 			if (pack.getPackageId().equals(place.getPackages().getPackageId())) {
 				place.setPackages(pack);
 			}
 		}
-//		placeRepository.save(place);
-		return convertor.convertEntityToDto(placeRepository.save(place));
+		return placeRepository.save(place);
 	}
 
 	@Override
@@ -49,24 +42,20 @@ public class PlacesServiceImplementation implements PlacesService {
 	}
 
 	@Override
-	public PlacePojo updatePlace(long placeId, PlacePojo placePojo) {
-		Place place = convertor.convertDtoToEntity(placePojo);
+	public Place updatePlace(long placeId, Place place) {
 		place.setPlaceId(placeId);
-//		placeRepository.save(place);
-		return convertor.convertEntityToDto(placeRepository.save(place));
+		return placeRepository.save(place);
 	}
 
 	@Override
-	public PlacePojo saveplaceById(long packId, PlacePojo placePojo) {
-		Place place = convertor.convertDtoToEntity(placePojo);
+	public Place saveplaceById(long packId, Place place) {
 		List<Package> packageList = packageRepository.findAll();
 		for (Package pack : packageList) {
 			if (pack.getPackageId().equals(packId)) {
 				place.setPackages(pack);
 			}
 		}
-//		placeRepository.save(place);
-		return convertor.convertEntityToDto(placeRepository.save(place));
+		return placeRepository.save(place);
 	}
 
 	@Override

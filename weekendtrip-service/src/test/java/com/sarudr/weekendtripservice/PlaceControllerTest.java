@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.sarudr.weekendtripservice.controller.PlacesController;
-import com.sarudr.weekendtripservice.dto.PlacePojo;
 import com.sarudr.weekendtripservice.model.Place;
 import com.sarudr.weekendtripservice.service.PlacesService;
 
@@ -38,12 +37,12 @@ class PlaceControllerTest {
 
 	@Test
 	void testSavePlace() {
-		PlacePojo placePojo = new PlacePojo();
-		PlacePojo savePlace = new PlacePojo();
+		Place placePojo = new Place();
+		Place savePlace = new Place();
 
 		when(placesService.savePlace(savePlace)).thenReturn(savePlace);
 
-		ResponseEntity<PlacePojo> entity = controller.savePlace(savePlace);
+		ResponseEntity<Place> entity = controller.savePlace(savePlace);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		assertEquals(savePlace, entity.getBody());
 
@@ -70,12 +69,12 @@ class PlaceControllerTest {
 
 	@Test
 	void testUpdatePack() {
-		PlacePojo placePojo = new PlacePojo();
-		PlacePojo updatePlace = new PlacePojo();
+		Place placePojo = new Place();
+		Place updatePlace = new Place();
 
 		when(placesService.updatePlace(1, placePojo)).thenReturn(updatePlace);
 
-		PlacePojo result = controller.updatePlaceByPlaceId(1, updatePlace);
+		Place result = controller.updatePlaceByPlaceId(1, updatePlace);
 
 		assertEquals(updatePlace, result);
 
@@ -84,7 +83,7 @@ class PlaceControllerTest {
 	}
 
 	@Test
-	 void changeStatusOfPack() {
+	void changeStatusOfPack() {
 
 		String val = null;
 
@@ -93,7 +92,6 @@ class PlaceControllerTest {
 		ResponseEntity<String> entity = controller.changeStatusOfPlace(1);
 
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
-
 
 		verify(placesService, times(1)).changeStatus(1);
 	}

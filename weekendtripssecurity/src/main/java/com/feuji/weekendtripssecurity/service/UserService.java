@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.feuji.weekendtripssecurity.authentication.ResetPassword;
 import com.feuji.weekendtripssecurity.user.User;
-import com.feuji.weekendtripssecurity.user.UserDto;
 
 public interface UserService {
 
@@ -15,7 +14,7 @@ public interface UserService {
 
 	User getById(Integer id);
 
-	UserDto updateUser(Integer id, UserDto userDto);
+	User updateUser(Integer id, User userDto);
 
 	Optional<User> changeStatusByEmail(String email);
 
@@ -23,5 +22,5 @@ public interface UserService {
 
 	User changePassword(ResetPassword resetPassword);
 
-	UserDto saveUser(UserDto userDto);
+	User saveUser(User userDto);
 }
