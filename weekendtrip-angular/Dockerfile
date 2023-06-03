@@ -78,6 +78,6 @@ WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
 
-COPY --from=builder /ang23/dist/weekendtrip-angular .
+COPY --from=builder /ang23/dist/WeekEndTrips .
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
