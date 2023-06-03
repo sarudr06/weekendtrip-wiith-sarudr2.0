@@ -30,6 +30,8 @@
 # Stage 1: Build the Angular application
 FROM node:14-alpine AS build
 
+RUN npm cache clean --force
+
 WORKDIR /app
 
 # Copy package.json and package-lock.json
@@ -42,13 +44,13 @@ RUN npm install
 COPY . .
 
 # Build the Angular application
-RUN npm run build -- --prod
+RUN npm run build
 
 # Stage 2: Serve the built Angular application using a lightweight web server
 FROM nginx:alpine
 
 # Copy the built Angular application files to the NGINX web server
-COPY --from=build /app/dist/week-end-trips /usr/share/nginx/html
+COPY --from=build /app/dist/weekendtrip-angular /usr/share/nginx/html
 
 # Expose the NGINX port
 EXPOSE 80
