@@ -3,7 +3,7 @@
 # # Use official node image as the base image
 # FROM node:alpine as builder
 # RUN npm cache clean --force
-# WORKDIR /ang23
+# WORKDIR /ang24
 # COPY . .
 # RUN npm cache clean --force
 # RUN npm i --force
@@ -18,7 +18,7 @@
 
 # RUN rm -rf ./*
 
-# COPY --from=builder /ang23/dist/ANGULAR .
+# COPY --from=builder /ang24/dist/ANGULAR .
 
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
@@ -61,13 +61,13 @@
 
 
 
-FROM node:alpine as builder
+FROM node:lts-alpine as builder
 RUN npm cache clean --force
-WORKDIR /ang23
+WORKDIR /ang24
 COPY . .
 RUN npm cache clean --force
 RUN npm i --force
-ENV NODE_OPTIONS="--openssl-legacy-provider"
+# ENV NODE_OPTIONS="--openssl-legacy-provider"
 
 RUN npm run build --prod
 
@@ -78,6 +78,6 @@ WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
 
-COPY --from=builder /ang23/dist/week-end-trips .
+COPY --from=builder /ang24/dist/week-end-trips .
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
